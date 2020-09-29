@@ -1,0 +1,5 @@
+TO COMPILE:
+
+    gcc -c lib.c -o lib.o  
+    gcc -c toExec.c -o toExec.o
+ 
