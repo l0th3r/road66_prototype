@@ -1,0 +1,11 @@
+//comment line
+//time_... = MILLISECONDS
+//proba_... = POURCENTAGES
+//name_... = STRING
+//
+inventory_slots=10
+time_interval=1
+name_start_city=startcity
+//
+proba_bad_event=20
+proba_event=5
