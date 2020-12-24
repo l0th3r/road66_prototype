@@ -5,7 +5,7 @@
 #include <time.h>
 
 #include <unistd.h>
-#include <ncurses.h>
+#include <ncurses/ncurses.h>
 
 #include "event/secondary/secondary_events.h"
 
@@ -14,7 +14,7 @@ WINDOW * new_win(char *name, int height, int width, int start_y, int start_x);
 void update_tra_prog(WINDOW * win, int height, int val);
 void wait(long msec);
 void print_dial(char *name, char *content);
-void print_conv(WINDOW * win, int id, int ev_w, char* path, char* char0, char* char1, char* char2, char* char3);
+void print_conv(WINDOW * win, int id, int ev_w, char* path, char* char0, char* char1, char* char2, char* char3, char* char4, char* char5);
 void str_clear(char *str);
 void wait_input(WINDOW * win_men);
 
@@ -74,15 +74,18 @@ int main(int ac, char **av)
 		{
 			intro(win_env, win_men, ev_w);
 		}
-
-		else if(temp == 25)
+		else if(temp == 20)
+			secondary_event_3(win_env, win_men, ev_w);
+		else if(temp == 33)
+			secondary_event_2(win_env, win_men, ev_w);
+		else if(temp == 40)
 			secondary_event_1(win_env, win_men, ev_w);
-		else if(temp == 60)
+		else if(temp == 50)
+			secondary_event_5(win_env, win_men, ev_w);
+		else if(temp == 72)
 			secondary_event_4(win_env, win_men, ev_w);
-		else if(temp == 99)
-		{
-			outro(win_env, win_men, ev_w);
-		}
+		else if(temp == 80)
+			secondary_event_6(win_env, win_men, ev_w);
 		temp++;
 	}
 	
@@ -160,7 +163,7 @@ int choice(WINDOW* win, char* choice1, char* choice2, char* choice3, char* choic
 	return selected;
 }
 
-void print_conv(WINDOW * win, int id, int ev_w, char* path, char* char0, char* char1, char* char2, char* char3)
+void print_conv(WINDOW * win, int id, int ev_w, char* path, char* char0, char* char1, char* char2, char* char3, char* char4, char* char5)
 {
 	char* raw;
 	char* file_path = malloc((str_len(path) + 10) * sizeof(char));
@@ -271,6 +274,20 @@ void print_conv(WINDOW * win, int id, int ev_w, char* path, char* char0, char* c
 					i = 0;
 					while(char3[i])
 						mvwprintw(win, line, ch++, "%c", char3[i++]);
+					fp = j;
+				}
+				else if(strcmp(temp, "char4") == 0)
+				{
+					i = 0;
+					while(char4[i])
+						mvwprintw(win, line, ch++, "%c", char4[i++]);
+					fp = j;
+				}
+				else if(strcmp(temp, "char5") == 0)
+				{
+					i = 0;
+					while(char5[i])
+						mvwprintw(win, line, ch++, "%c", char5[i++]);
 					fp = j;
 				}
 				str_clear(temp);
